@@ -156,7 +156,7 @@ if ($MyInvocation.ScriptName -notlike '*Invoke-Build.ps1') {
     }
 
     if (($Tasks -contains 'CompileRootConfiguration' -and $Tasks -contains 'CompileRootMetaMof') -or -not $Tasks) {
-        Invoke-Build -File "$ProjectPath\PostBuild.ps1"
+        Invoke-Build -File "$ProjectPath\PostBuild.ps1" -BuildOutput $BuildOutput
     }
 
     $m.Dispose()
