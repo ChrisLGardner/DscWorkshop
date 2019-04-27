@@ -9,4 +9,5 @@
     }
 
     CommonTasks     = 'latest'
+    JeaDscDatum = 'latest'
 }

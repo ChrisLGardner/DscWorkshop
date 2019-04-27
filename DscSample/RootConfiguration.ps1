@@ -17,13 +17,14 @@ configuration "RootConfiguration"
 {
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName CommonTasks
+    Import-DscResource -ModuleName JeaDscDatum
 
     $module = Get-Module -Name PSDesiredStateConfiguration
     & $module {
         param(
             [string]$BuildVersion,
             [string]$Environment
-        ) 
+        )
         $Script:PSTopConfigurationName = "MOF_$($Environment)_$($BuildVersion)"
     } $buildVersion, $environment
 
