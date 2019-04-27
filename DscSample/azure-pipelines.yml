@@ -5,6 +5,9 @@ variables:
   system.debug: true
 
 steps:
+- powershell: |
+    Install-Module PowerShellGet -Force
+
 - task: PowerShell@2
   displayName: 'Build configurations'
   inputs:
