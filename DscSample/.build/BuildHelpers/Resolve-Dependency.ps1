@@ -46,12 +46,12 @@ function Resolve-Dependency {
     $psDependParams = @{
         Force = $true
         Path  = "$ProjectPath\PSDepend.Build.psd1"
+        Target = $TargetPath
     }
     if ($PSBoundParameters.ContainsKey('Verbose')) {
         $psDependParams.Add('Verbose', $Verbose)
     }
     Import-Module -Name PSDepend
-    $psDependParams.PSDependOptions.Add('Target', $TargetPath)
     Invoke-PSDependInternal -PSDependParameters $psDependParams -Reporitory $GalleryRepository
     Write-Verbose 'Project Bootstrapped, returning to Invoke-Build'
 }

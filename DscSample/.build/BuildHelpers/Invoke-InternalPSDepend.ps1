@@ -19,7 +19,8 @@ function Invoke-PSDependInternal {
 
     $content = Get-Content -Path $psDependFilePath -Raw
     $newString = "Repository = '$Reporitory'"
-    $content = $content -replace "Repository = 'PSGallery'", $newString
+    $newTarget = "Target = '$($PSDependParameters.Target)'"
+    $content = $content -replace "Repository = 'PSGallery'", $newString -replace "Target = 'BuildOutput\\Modules'",$newTarget
 
     $path = "$projectPath\PSDependTemp.psd1"
     $content | Out-File $path -Force
