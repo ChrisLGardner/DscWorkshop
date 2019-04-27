@@ -1,6 +1,8 @@
 function Resolve-Dependency {
     [CmdletBinding()]
-    param()
+    param(
+        $TargetPath
+    )
 
     Write-Host "Downloading dependencies, this may take a while" -ForegroundColor Green
     if (-not (Get-PackageProvider -Name NuGet -ForceBootstrap)) {
@@ -49,6 +51,7 @@ function Resolve-Dependency {
         $psDependParams.Add('Verbose', $Verbose)
     }
     Import-Module -Name PSDepend
+    $psDependParams.PSDependOptions.Add('Target', $TargetPath)
     Invoke-PSDependInternal -PSDependParameters $psDependParams -Reporitory $GalleryRepository
     Write-Verbose 'Project Bootstrapped, returning to Invoke-Build'
 }

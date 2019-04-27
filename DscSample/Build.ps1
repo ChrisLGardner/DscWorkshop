@@ -109,7 +109,7 @@ if (-not (Get-Module -Name InvokeBuild -ListAvailable) -and -not $ResolveDepende
 
 if ($ResolveDependency) {
     . $PSScriptRoot/.build/BuildHelpers/Resolve-Dependency.ps1
-    Resolve-Dependency
+    Resolve-Dependency -TargetPath "$BuildOutput\Modules"
 }
 
 if ($MyInvocation.ScriptName -notlike '*Invoke-Build.ps1') {
@@ -174,9 +174,6 @@ if ($MyInvocation.ScriptName -notlike '*Invoke-Build.ps1') {
     return
 }
 
-Get-ChildItem -Path $PSScriptRoot\BuildOutput\Modules -Directory | ForEach-Object {
-    Import-Module $_.FullName
-}
 if ($TaskHeader) {
     Set-BuildHeader $TaskHeader
 }
