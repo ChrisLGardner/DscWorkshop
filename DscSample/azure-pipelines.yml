@@ -13,14 +13,6 @@ steps:
     arguments: '-BuildOutput $(Build.ArtifactStagingDirectory) -ResolveDependency'
     failOnStderr: true
     workingDirectory: '$(System.DefaultWorkingDirectory)\DscSample'
-- task: PowerShell@2
-  displayName: 'Check modules'
-  condition: succeededOrFailed()
-  inputs:
-    targetType: inline
-    script: |
-        gmo -list
-
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: meta mof'

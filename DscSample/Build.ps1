@@ -170,10 +170,13 @@ if ($MyInvocation.ScriptName -notlike '*Invoke-Build.ps1') {
     Write-Host "Environment Variables" -ForegroundColor Magenta
     dir env: | Out-String | Write-Host -ForegroundColor Magenta
     Write-Host "------------------------------------" -ForegroundColor Magenta
-    
+
     return
 }
 
+Get-ChildItem -Path $PSScriptRoot\BuildOutput\Modules -Directory | ForEach-Object {
+    Import-Module $_.FullName
+}
 if ($TaskHeader) {
     Set-BuildHeader $TaskHeader
 }
