@@ -19,9 +19,8 @@ steps:
   inputs:
     targetType: inline
     script: |
-        ls '$(Build.ArtifactStagingDirectory)\Modules'
-        ls '$(System.DefaultWorkingDirectory)\DscSample\BuildOutput\Modules'
-        ls '$(System.DefaultWorkingDirectory)\DscSample\BuildOutput'
+        gmo -list
+
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: meta mof'
