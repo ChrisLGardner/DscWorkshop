@@ -1,0 +1,39 @@
+pool:
+  name: Hosted VS2017
+
+variables:
+  system.debug: true
+
+steps:
+- task: PowerShell@2
+  displayName: 'Build configurations'
+  inputs:
+    targetType: filePath
+    filePath: '.\DscSample\build.ps1'
+    arguments: '-BuildOutput $(Build.ArtifactStagingDirectory) -ResolveDependency'
+    failOnStderr: true
+    workingDirectory: '$(System.DefaultWorkingDirectory)\DscSample'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: meta mof'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\MetaMof'
+    ArtifactName: metamof
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Modules'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\CompressedModules'
+    ArtifactName: modules
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: mof'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\MOF'
+    ArtifactName: mof
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: RSOP'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\RSOP'
+    ArtifactName: rsop
